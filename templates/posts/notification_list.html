@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %}Notifications{% endblock %}
+
+{% block content %}
+    <div class="notification-container">
+        <h2>Notifications</h2>
+
+        {% if unread_count > 0 %}
+            <div class="unread-count">
+                You have {{ unread_count }} unread {{ unread_count|pluralize:"notification,notifications" }}
+            </div>
+        {% else %}
+            <div class="no-unread">
+                All notifications are read.
+            </div>
+        {% endif %}
+
+        <ul class="notification-list">
+            {% for notification in notification_list %}
+                <div class="notification-item{% if notification.is_read %} read{% else %} unread{% endif %}"
+                     data-id="{{ notification.id }}">
+                    <p>{{ notification.liker.username }} liked your post {{ notification.post.title }}
+                        <br>time: {{ notification.created_at }}</p>
+                    {% if not notification.is_read %}
+                        <button type="button" onclick="markAsRead({{ notification.id }})" class="mark-as-read-button">
+                            Пометить как прочитанное
+                        </button>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% if is_paginated %}
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">&laquo; Предыдущая</a>
+            {% endif %}
+
+            <span>Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Следующая &raquo;</a>
+            {% endif %}
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let cookie of cookies) {
+                    cookie = cookie.trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        function markAsRead(notificationId) {
+            fetch(`/api/v1/notification/${notificationId}/read/`, {
+                method: 'PATCH',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'),
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Ошибка при обновлении уведомления');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                    if (data.is_read) {
+                        const notificationElement = document.querySelector(`.notification-item[data-id="${notificationId}"]`);
+                        if (notificationElement) {
+                            notificationElement.classList.remove('unread');
+                            notificationElement.classList.add('read');
+
+                            const button = notificationElement.querySelector('.mark-as-read-button');
+                            if (button) {
+                                button.remove();
+                            }
+                        } else {
+                            console.error(`Элемент уведомления с data-id="${notificationId}" не найден.`);
+                        }
+
+                        const notificationBadge = document.querySelector('.notification-badge');
+                        if (notificationBadge) {
+                            let count = parseInt(notificationBadge.textContent, 10);
+                            if (!isNaN(count) && count > 0) {
+                                count -= 1;
+                                if (count === 0) {
+                                    notificationBadge.remove();
+                                } else {
+                                    notificationBadge.textContent = count;
+                                }
+                            }
+                        }
+                    }
+                })
+                .catch(error => console.error('Ошибка:', error));
+        }
+    </script>
+{% endblock %}
+

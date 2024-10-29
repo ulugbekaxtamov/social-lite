@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Мои Посты{% endblock %}
+
+{% block content %}
+    <button type="button" class="add-post-button" onclick="openCreatePostModal()">Добавить пост</button>
+
+    <div class="post-gallery">
+        {% for post in post_list %}
+            <div class="post-item">
+                {% if post.content %}
+                    <div class="post-media">
+                        <img src="{{ post.content.url }}" alt="{{ post.title }}">
+                    </div>
+                {% endif %}
+                <div class="post-info">
+                    <h3>{{ post.title }}</h3>
+                    <p>{{ post.description }}</p>
+                    <span class="like-count">{{ post.like_count }} лайков</span>
+                </div>
+                <div class="post-actions">
+                    <button type="button"
+                            onclick="openEditModal({{ post.id }}, '{{ post.title }}', '{{ post.description }}')"
+                            class="edit-button">Изменить
+                    </button>
+                    <button type="button" onclick="deletePost({{ post.id }})" class="delete-button">Удалить</button>
+                </div>
+            </div>
+        {% empty %}
+            <p>У вас пока нет постов.</p>
+        {% endfor %}
+    </div>
+
+    <div id="createPostModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCreatePostModal()">&times;</span>
+            <h2>Создать Новый Пост</h2>
+            <form id="createPostForm" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="new-title">Заголовок</label>
+                <input type="text" id="new-title" name="title" required>
+
+                <label for="new-description">Описание</label>
+                <textarea id="new-description" name="description" required></textarea>
+
+                <label for="new-content">Фото (обязательно)</label>
+                <input type="file" id="new-content" name="content" accept="image/*" required>
+
+                <button type="button" onclick="createPost()">Создать пост</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditModal()">&times;</span>
+            <h2>Редактировать Пост</h2>
+            <form id="editForm" method="post">
+                <input type="hidden" id="postId" name="postId">
+                <label for="title">Заголовок</label>
+                <input type="text" id="title" name="title">
+                <label for="description">Описание</label>
+                <textarea id="description" name="description"></textarea>
+                <button type="button" onclick="updatePost()">Сохранить изменения</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        function openCreatePostModal() {
+            document.getElementById('createPostModal').style.display = 'block';
+        }
+
+        function closeCreatePostModal() {
+            document.getElementById('createPostModal').style.display = 'none';
+        }
+
+        function createPost() {
+            const form = document.getElementById('createPostForm');
+            const formData = new FormData(form);
+
+            fetch("{% url 'api_post:create' %}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'),
+                },
+                body: formData,
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error('Ошибка при создании поста');
+                    return response.json();
+                })
+                .then(data => {
+                    alert('Пост успешно создан');
+                    location.reload();
+                })
+                .catch(error => console.error('Ошибка:', error));
+        }
+
+        function openEditModal(postId, title, description) {
+            document.getElementById('postId').value = postId;
+            document.getElementById('title').value = title;
+            document.getElementById('description').value = description;
+            document.getElementById('editModal').style.display = 'block';
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                let cookies = document.cookie.split(';');
+                for (let cookie of cookies) {
+                    cookie = cookie.trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        function updatePost() {
+            const postId = document.getElementById('postId').value;
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+
+            fetch(`/api/v1/post/${postId}/`, {
+                method: 'PATCH',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'same-origin',
+                body: JSON.stringify({title: title, description: description}),
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error('Ошибка при обновлении поста');
+                    return response.json();
+                })
+                .then(data => {
+                    alert('Пост успешно обновлен');
+                    location.reload();
+                })
+                .catch(error => console.error('Ошибка:', error));
+        }
+
+        function deletePost(postId) {
+            if (!confirm('Вы уверены, что хотите удалить этот пост?')) return;
+
+            fetch(`/api/v1/post/${postId}/`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'),
+                },
+                credentials: 'same-origin',
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error('Ошибка при удалении поста');
+                    alert('Пост успешно удален');
+                    location.reload();
+                })
+                .catch(error => console.error('Ошибка:', error));
+        }
+
+        window.onclick = function (event) {
+            const createModal = document.getElementById('createPostModal');
+            const editModal = document.getElementById('editModal');
+            if (event.target === createModal) createModal.style.display = "none";
+            if (event.target === editModal) editModal.style.display = "none";
+        }
+    </script>
+{% endblock %}

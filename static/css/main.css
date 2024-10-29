@@ -1,0 +1,866 @@
+
+.about-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-container h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.about-container h3 {
+    font-size: 20px;
+    color: #555;
+    margin-top: 20px;
+}
+
+.about-container p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.about-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.about-container ul li {
+    font-size: 16px;
+    color: #007BFF;
+    margin: 8px 0;
+}
+
+.about-container ul li a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.about-container ul li a:hover {
+    text-decoration: underline;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Header title */
+.header-title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* Navigation menu */
+nav ul {
+    list-style-type: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ffdd57;
+}
+
+/* Main content */
+.content {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+}
+
+footer {
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+@media (max-width: 600px) {
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+}
+
+
+/* main.css */
+
+/* Сброс стилей и глобальные настройки */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+/* Контейнер галереи постов */
+.post-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px;
+}
+
+/* Индивидуальный пост */
+.post-item {
+    width: 300px;
+    background-color: #fff;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Медиа контент */
+.post-media img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Информация о посте */
+.post-info {
+    padding: 10px;
+    flex-grow: 1;
+}
+
+.post-info h3 {
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+.post-info p {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Действия с постом */
+.post-actions {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+
+.like-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 5px;
+}
+
+.like-button img {
+    width: 24px;
+    height: 24px;
+}
+
+.like-count {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Пагинация */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.pagination a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.pagination span {
+    margin: 0 10px;
+    color: #555;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .post-item {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .post-gallery {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
+/* main.css */
+
+/* Стили для контейнера формы входа */
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-form input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.btn {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.login-container p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-container a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}
+
+
+.logout-button {
+    background: none;
+    border: none;
+    color: #ff0015;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+}
+
+.logout-button:hover {
+    color: #0056b3;
+}
+
+
+.like-icon {
+    transition: color 0.3s ease;
+}
+
+.liked-icon {
+    color: #e0245e;
+    transition: color 0.3s ease;
+}
+
+/* Hover-эффект для кнопки лайка */
+.like-button:hover .like-icon {
+    color: #ff4757;
+}
+
+.like-button:hover .liked-icon {
+    color: #ff4757;
+}
+
+
+.like-icon, .liked-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.like-icon {
+    color: #bbb;
+}
+
+.liked-icon {
+    color: #e0245e;
+}
+
+.like-button {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.edit-button, .delete-button {
+    padding: 8px 12px;
+    margin-right: 8px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.delete-button {
+    background-color: #f44336;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный темный фон */
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 10% auto;
+    padding: 20px 30px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+.modal-content h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.modal-content label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.modal-content input[type="text"],
+.modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.modal-content textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.modal-content button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+    background-color: #45a049;
+}
+
+
+/* Стили для затемненного фона при открытом модальном окне */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Контейнер модального окна */
+.modal-content {
+    background-color: #ffffff;
+    margin: 10% auto;
+    padding: 20px 30px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Кнопка закрытия окна */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Заголовок модального окна */
+.modal-content h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Стили для полей ввода и текстовых областей */
+.modal-content label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="file"],
+.modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Установка минимальной высоты для текстовой области */
+.modal-content textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Стиль для кнопок */
+.modal-content button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+    background-color: #45a049;
+}
+
+/* Кнопка для добавления поста */
+.add-post-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-post-button:hover {
+    background-color: #45a049;
+}
+
+
+.notification-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
+.notification-container h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+}
+
+.unread-count, .no-unread {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #007bff;
+}
+
+.notification-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.notification-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.notification-item.new-notification {
+    background-color: #e7f3ff;
+}
+
+.notification-item p {
+    margin: 0;
+    color: #555;
+}
+
+.new-badge {
+    color: #fff;
+    background-color: #007bff;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+
+.notification-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.notification-item.unread {
+    background-color: #f0f8ff;
+}
+
+.notification-item.read {
+    background-color: #e9e9e9;
+}
+
+.mark-as-read-button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.mark-as-read-button:hover {
+    background-color: #45a049;
+}
+
+
+/* Контейнер для страницы регистрации */
+.register-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Заголовок страницы регистрации */
+.register-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Стили для формы */
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Поля ввода */
+.register-form input[type="text"],
+.register-form input[type="email"],
+.register-form input[type="password"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.register-form input[type="text"]:focus,
+.register-form input[type="email"]:focus,
+.register-form input[type="password"]:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* Кнопка регистрации */
+.register-button {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register-button:hover {
+    background-color: #45a049;
+}
+
+/* Ссылка на вход */
+.register-login-link {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #333;
+}
+
+.register-login-link a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-login-link a:hover {
+    text-decoration: underline;
+}
+
+.notification-badge {
+    background-color: red;
+    color: white;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    margin-left: 5px;
+}
+
+/* Пример стиля для активной ссылки */
+nav ul li.active a {
+    font-weight: bold;
+    color: #4CAF50;
+    border-bottom: 2px solid #4CAF50;
+}
+
+
+/* Стили для карточки профиля */
+.profile-card {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    background-color: #fff;
+}
+
+.profile-avatar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.profile-info h2 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.edit-profile-button {
+    margin-top: 15px;
+    padding: 8px 16px;
+    border: none;
+    background-color: #4CAF50;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Стили для модального окна */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+.close-button {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.avatar-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.logout-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
+    vertical-align: middle;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}

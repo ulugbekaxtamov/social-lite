@@ -1,0 +1,78 @@
+{% load static %}
+{% load count_notification %}
+{% load active_link_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            Social Network Prototype
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+<header>
+    <div class="header-title">
+        <a href="/">
+            Social Network
+        </a>
+    </div>
+    <nav>
+        <ul>
+            <li class="{% active_link 'post:post_list' 'active' %}">
+                <a href="{% url 'post:post_list' %}">Posts</a>
+            </li>
+
+            <li class="{% active_link 'post:my_post_list' 'active' %}">
+                <a href="{% url 'post:my_post_list' %}">
+                    My Posts
+                </a>
+            </li>
+
+            <li class="{% active_link 'post:notification_list' 'active' %}">
+                <a href="{% url 'post:notification_list' %}">
+                    Notifications
+                    {% unread_notifications_count request.user as notification_count %}
+                    {% if notification_count %}
+                        <span class="notification-badge">{{ notification_count }}</span>
+                    {% endif %}
+                </a>
+            </li>
+
+            {% if user.is_authenticated %}
+                <li class="{% active_link 'user:profile' 'active' %}">
+                    <a href="{% url 'user:profile' %}">
+                        My Profile
+
+                        <img src="{{ user.get_avatar_url }}" alt="Profile Avatar" class="avatar-icon">
+                    </a>
+                </li>
+
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-button">
+                        <img src="{% static 'images/logout.webp' %}" alt="Logout Icon" class="logout-icon">
+                    </button>
+                </form>
+
+            {% else %}
+                <li class="{% active_link 'login' 'active' %}"><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+
+<div class="content">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<footer>
+    <p>&copy; 2024 Social Network Prototype. All rights reserved.</p>
+</footer>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

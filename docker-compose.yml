@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=${DB_NAME:-db}
+      - POSTGRES_USER=${DB_USER:-root}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-postgres}
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - social_network
+
+  web:
+    build: .
+    command: sh run.sh
+    volumes:
+      - ./media:/code/media
+      - ./staticfiles:/code/staticfiles
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - SECRET_KEY=${SECRET_KEY:-django-insecure-sec}
+      - DEBUG=${DEBUG:-TRUE}
+      - DB_NAME=${DB_NAME:-db}
+      - DB_USER=${DB_USER:-root}
+      - DB_PASSWORD=${DB_PASSWORD:-postgres}
+      - DB_HOST=db
+      - DB_PORT=5432
+    restart: always
+    networks:
+      - social_network
+
+networks:
+  social_network:

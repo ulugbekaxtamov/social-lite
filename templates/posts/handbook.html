@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Справочник{% endblock %}
+
+{% block content %}
+    <div class="about-container">
+        <h2>О проекте</h2>
+        <p>
+            Этот проект представляет собой социальную сеть,
+            где пользователи могут регистрироваться, публиковать посты,
+            .....
+        </p>
+
+        <h3>Документация API</h3>
+        <ul>
+            <li><a href="/swagger" target="_blank">Swagger Documentation</a> – Интерактивная документация API, созданная
+                с помощью Swagger.
+            </li>
+            <li><a href="/redoc" target="_blank">ReDoc Documentation</a> – Альтернативная документация API, созданная с
+                использованием ReDoc.
+            </li>
+        </ul>
+
+        <h3>Административная панель</h3>
+        <ul>
+            <li><a href="/admin" target="_blank">Django Admin</a> – Доступ к административной панели Django, где можно
+                управлять данными приложения.
+            </li>
+        </ul>
+
+        <h3>Основные страницы веб-приложения</h3>
+        <ul>
+            <li><a href="/login" target="_blank">Вход</a> – Страница авторизации пользователей.</li>
+            <li><a href="/user/register" target="_blank">Регистрация</a> – Страница для создания нового аккаунта.</li>
+            <li><a href="/user/profile" target="_blank">Регистрация</a> – Страница для создания нового аккаунта.</li>
+            <li><a href="/post/list" target="_blank">Список постов</a> – Главная страница, где отображаются все посты
+            <li><a href="/post/my-posts/" target="_blank">Список мой постов</a> – Главная страница, где отображаются все
+                посты
+            <li><a href="/post/notifications/" target="_blank">Список уведомление</a> – Главная страница, где
+                отображаются все посты
+                пользователей.
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+

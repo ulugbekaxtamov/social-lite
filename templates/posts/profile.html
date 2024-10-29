@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+    <div class="profile-card">
+        <div class="profile-avatar">
+            <img src="{{ user_profile.get_avatar_url }}" alt="Profile Avatar">
+        </div>
+        <div class="profile-info">
+            <h2>{{ user_profile.username }}</h2>
+            <p>Name: {{ user_profile.name }}</p>
+            <button type="button" class="edit-profile-button" onclick="openEditModal()">Edit Profile</button>
+        </div>
+    </div>
+
+    <div id="editProfileModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeEditModal()">&times;</span>
+            <h3>Edit Profile</h3>
+            <form id="profileUpdateForm" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="avatar">Avatar:</label>
+                <input type="file" id="avatar" name="avatar"><br>
+
+                <label for="name">First Name:</label>
+                <input type="text" id="name" name="name" value="{{ user_profile.name }}"><br>
+
+                <button type="button" onclick="updateProfile()">Save Changes</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        function openEditModal() {
+            document.getElementById("editProfileModal").style.display = "block";
+        }
+
+        function closeEditModal() {
+            document.getElementById("editProfileModal").style.display = "none";
+        }
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let cookie of cookies) {
+                    cookie = cookie.trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        function updateProfile() {
+            const formData = new FormData(document.getElementById("profileUpdateForm"));
+            console.log(formData)
+            fetch("{% url 'api_user:profile' %}", {
+                method: "PATCH",
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        location.reload();
+                    } else {
+                        alert("Error updating profile");
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+        }
+    </script>
+{% endblock %}
