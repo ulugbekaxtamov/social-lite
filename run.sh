@@ -9,7 +9,7 @@ echo "Apply database migrations"
 python manage.py migrate
 
 # Fake Posts for demo
-python manage.py create_post
+#python manage.py create_post
 
 # Start server
 echo "Starting server"
