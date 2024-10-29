@@ -1,4 +1,4 @@
-# FootballFieldBooking
+# Social LITE
 
 SOCIAL LITE (Social Network Prototype).
 
@@ -22,7 +22,7 @@ Install the following tools:
 
 2. **Navigate to the project directory**:
     ```
-    cd social_lite
+    cd social-lite
     ```
 
 3. **Create `.env` files using examples**:
