@@ -37,7 +37,7 @@ urlpatterns = [
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('login/', auth_views.LoginView.as_view(template_name='user/login.html'), name='login'),
 
     path('', HandBookView.as_view(), name='hand-book'),
     path('post/', include('apps.post.urls')),

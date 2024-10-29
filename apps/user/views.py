@@ -30,7 +30,7 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class RegisterView(View):
-    template_name = 'register.html'
+    template_name = 'user/register.html'
 
     def get(self, request):
         form = CustomUserCreationForm()
@@ -47,7 +47,7 @@ class RegisterView(View):
 
 class ProfileView(LoginRequiredMixin, generic.DetailView):
     model = User
-    template_name = 'profile.html'
+    template_name = 'user/profile.html'
     context_object_name = 'user_profile'
 
     def get_object(self):

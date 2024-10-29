@@ -8,7 +8,7 @@ from .models import Notification
 
 class PostListView(generic.ListView):
     model = Post
-    template_name = 'post_list.html'
+    template_name = 'posts/post_list.html'
     context_object_name = 'post_list'
     paginate_by = 25
 
@@ -32,7 +32,7 @@ class PostListView(generic.ListView):
 
 class MyPostListView(LoginRequiredMixin, generic.ListView):
     model = Post
-    template_name = 'my_post_list.html'
+    template_name = 'posts/my_post_list.html'
     context_object_name = 'post_list'
     paginate_by = 25
 
@@ -44,7 +44,7 @@ class MyPostListView(LoginRequiredMixin, generic.ListView):
 
 class NotificationListView(LoginRequiredMixin, generic.ListView):
     model = Notification
-    template_name = 'notification_list.html'
+    template_name = 'posts/notification_list.html'
     context_object_name = 'notification_list'
     paginate_by = 15
 
