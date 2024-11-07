@@ -32,7 +32,7 @@ DEBUG = False
 if os.getenv('DEBUG') == 'TRUE':
     DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['3.37.86.63']
 CORS_ORIGIN_ALLOW_ALL = True
 # CORS_ALLOWED_ORIGINS = []
 # CSRF_TRUSTED_ORIGINS = []
